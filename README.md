@@ -1,6 +1,6 @@
 # eslint-plugin-modulename
 
-An ESLint rule which will verify imports/requires are for modules with snake-case names
+An ESLint rule which will verify imports/requires are for modules with param-case names
 
 ## To use:
 
@@ -17,7 +17,7 @@ An ESLint rule which will verify imports/requires are for modules with snake-cas
 * Add the rule to the rules object like this:
 ```
     "rules": {
-        "module-name/snake-case": 2
+        "module-name/param-case": 2
     }
 ```
 

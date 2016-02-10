@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-module-name",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Checks module names in an import/require",
   "keywords": [
     "eslint",

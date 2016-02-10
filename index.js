@@ -2,7 +2,7 @@ var CapTest = new RegExp('[A-Z]');
 
 module.exports = {
   rules: {
-    "snake-case": function (context) {
+    "param-case": function (context) {
       return {
         "CallExpression": function(call) {
           if (
@@ -12,7 +12,7 @@ module.exports = {
 
           if (CapTest.test(call.arguments[0].value)) {
             context.report({
-              message: 'Snake case required for module names',
+              message: 'Param case required for module names: ' + call.arguments[0].value,
               node: call.callee
             });
           }
@@ -20,7 +20,7 @@ module.exports = {
         "ImportDeclaration": function(importDec) {
           if (CapTest.test(importDec.source.value)) {
             context.report({
-              message: 'Snake case required for module names',
+              message: 'Param case required for module names: ' + importDec.source.value,
               node: importDec
             });
           }
