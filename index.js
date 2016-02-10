@@ -1,8 +1,14 @@
 var CapTest = new RegExp('[A-Z]');
 
 function fixCase(str) {
-  return str.replace(/\/[A-Z]+/g, function(match) {
+  return str.replace(/\/[A-Z]{2,}/g, function(match) {
+    return (match.substr(0, match.length - 1) + '-' + match.substr(match.length - 1, 1)).toLowerCase();
+  }).replace(/\/[A-Z]+/g, function(match) {
     return match.toLowerCase();
+  }).replace(/[A-Z]{2,}$/g, function(match) {
+    return '-' + match.toLowerCase();
+  }).replace(/[A-Z]{2,}/g, function(match) {
+    return '-' + (match.substr(0, match.length - 1) + '-' + match.substr(match.length - 1, 1)).toLowerCase();
   }).replace(/[A-Z]+/g, function(match) {
     return '-' + match.toLowerCase();
   });
