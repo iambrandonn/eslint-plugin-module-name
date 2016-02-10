@@ -1,8 +1,16 @@
 var CapTest = new RegExp('[A-Z]');
 
+function fixCase(str) {
+  return str.replace(/\/[A-Z]+/g, function(match) {
+    return match.toLowerCase();
+  }).replace(/[A-Z]+/g, function(match) {
+    return '-' + match.toLowerCase();
+  });
+}
+
 module.exports = {
   rules: {
-    "param-case": function (context) {
+    "kebab-case": function (context) {
       return {
         "CallExpression": function(call) {
           if (
@@ -12,16 +20,28 @@ module.exports = {
 
           if (CapTest.test(call.arguments[0].value)) {
             context.report({
-              message: 'Param case required for module names: ' + call.arguments[0].value,
-              node: call.callee
+              message: 'Kebab case required for module names: ' + call.arguments[0].value,
+              node: call.callee,
+              fix: function(fixer) {
+                return fixer.replaceText(
+                  call.arguments[0],
+                  fixCase(call.arguments[0].raw)
+                );
+              }
             });
           }
         },
         "ImportDeclaration": function(importDec) {
           if (CapTest.test(importDec.source.value)) {
             context.report({
-              message: 'Param case required for module names: ' + importDec.source.value,
-              node: importDec
+              message: 'Kebab case required for module names: ' + importDec.source.value,
+              node: importDec,
+              fix: function(fixer) {
+                return fixer.replaceText(
+                  importDec.source,
+                  fixCase(importDec.source.raw)
+                );
+              }
             });
           }
         }

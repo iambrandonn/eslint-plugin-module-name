@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-module-name",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Checks module names in an import/require",
   "keywords": [
     "eslint",
@@ -9,14 +9,13 @@
     "import",
     "require"
   ],
-  "repository": { 
-    "type" : "git", 
-    "url" : "https://github.com/iambrandonn/eslint-plugin-module-name"
-  },  
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iambrandonn/eslint-plugin-module-name"
+  },
   "author": "Brandon Nicholls",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
   },
   "devDependencies": {

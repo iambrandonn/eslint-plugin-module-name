@@ -1,6 +1,6 @@
 # eslint-plugin-modulename
 
-An ESLint rule which will verify imports/requires are for modules with param-case names
+An ESLint rule which will verify imports/requires are for modules with kebab-case names
 
 ## To use:
 
@@ -17,7 +17,7 @@ An ESLint rule which will verify imports/requires are for modules with param-cas
 * Add the rule to the rules object like this:
 ```
     "rules": {
-        "module-name/param-case": 2
+        "module-name/kebab-case": 2
     }
 ```
 
