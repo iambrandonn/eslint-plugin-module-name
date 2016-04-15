@@ -1,7 +1,11 @@
 var CapTest = new RegExp('[A-Z]');
 
 function fixCase(str) {
-  return str.replace(/\/[A-Z]{2,}/g, function(match) {
+  return str.replace(/\/[A-Z]*($|')/g, function(match) {
+    return match.toLowerCase();
+  }).replace(/\/[A-Z]*\//g, function(match) {
+    return match.toLowerCase();
+  }).replace(/\/[A-Z]{2,}/g, function(match) {
     return (match.substr(0, match.length - 1) + '-' + match.substr(match.length - 1, 1)).toLowerCase();
   }).replace(/\/[A-Z]+/g, function(match) {
     return match.toLowerCase();
@@ -20,9 +24,13 @@ module.exports = {
       return {
         "CallExpression": function(call) {
           if (
-            call.callee.name !== "require" || 
+            call.callee.name !== "require" ||
             call.callee.type !== "Identifier"
           ) return;
+
+          if (call.arguments.length === 0) {
+            return;
+          }
 
           if (CapTest.test(call.arguments[0].value)) {
             context.report({
@@ -38,6 +46,10 @@ module.exports = {
           }
         },
         "ImportDeclaration": function(importDec) {
+          if (!importDec.source || !importDec.source.value) {
+            return;
+          }
+
           if (CapTest.test(importDec.source.value)) {
             context.report({
               message: 'Kebab case required for module names: ' + importDec.source.value,
